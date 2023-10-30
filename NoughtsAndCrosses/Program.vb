@@ -4,6 +4,8 @@ Imports System.Security.Cryptography.X509Certificates
 Module Program
     Dim oneName As String
     Dim twoName As String
+    Dim oneSymbol As String
+    Dim twoSymbol As String
     Dim theBoard(5, 5) As String
     Sub Main(args As String()) 'this is ugly, maybe a for loop?
         Console.WriteLine("Noughts and Crosses v0.1")
@@ -20,6 +22,18 @@ Module Program
         Call menu()
     End Sub
     Sub createBoard() 'make this more efficient in future version(s)!
+        theBoard(1, 0) = " 1 " 'begin xCoord numbering
+        theBoard(2, 0) = "   "
+        theBoard(3, 0) = " 2 "
+        theBoard(4, 0) = "   "
+        theBoard(5, 0) = " 3 " 'end xCoord numbering
+
+        theBoard(0, 1) = " 1 " 'begin yCoord numbering
+        theBoard(0, 2) = "   "
+        theBoard(0, 3) = " 2 "
+        theBoard(0, 4) = "   "
+        theBoard(0, 5) = " 3 " 'end yCoord numbering
+
         theBoard(1, 1) = "   " 'first row begin draw
         theBoard(2, 1) = " | "
         theBoard(3, 1) = "   "
@@ -93,9 +107,14 @@ Module Program
         End While
     End Sub
     Sub newGame()
+        Dim gameWon As Boolean = False
         Console.WriteLine("Starting New Game...")
-        Call pickSymbol()
+        Call pickSymbol(oneName, twoName)
         Call drawBoard()
+        While gameWon = False
+
+        End While
+
     End Sub
     Sub loadGame()
         Console.WriteLine("Preparing to load a previous game...")
@@ -103,5 +122,49 @@ Module Program
     Sub saveGame()
         Console.WriteLine("Preparing to save the last game played...")
     End Sub
-    Sub pickSymbols()
+    Sub pickSymbol(ByVal pOne As String, ByVal pTwo As String)
+        Dim symbolChoice As Integer
+        Dim validInput As Boolean = False
+        Console.WriteLine(pOne & ", please choose 1 for symbol 'X' or 2 for symbol 'O': ")
+        While validInput = False
+            symbolChoice = Console.ReadLine()
+            Select Case symbolChoice
+                Case 1
+                    Console.WriteLine(pOne & "you have chosen 'X' as your symbol for this game. ")
+                    oneSymbol = " X "
+                    validInput = True
+                Case 2
+                    Console.WriteLine(pOne & "you have chosen 'O' as your symbol for this game. ")
+                    oneSymbol = " O "
+                    validInput = True
+                Case Else
+                    Console.WriteLine("Oops, that didn't seem to work. Please try again: ")
+                    Console.WriteLine(pOne & ", please choose 1 for symbol 'X' or 2 for symbol 'O': ")
+                    symbolChoice = Console.ReadLine()
+            End Select
+        End While
+        validInput = False
+        symbolChoice = 0
+        Console.WriteLine(pTwo & ", please choose 1 for symbol 'X' or 2 for symbol 'O': ")
+        While validInput = False
+            symbolChoice = Console.ReadLine()
+            Select Case symbolChoice
+                Case 1
+                    Console.WriteLine(pTwo & "you have chosen 'X' as your symbol for this game. ")
+                    twoSymbol = " X "
+                    validInput = True
+                Case 2
+                    Console.WriteLine(pTwo & "you have chosen 'O' as your symbol for this game. ")
+                    twoSymbol = " O "
+                    validInput = True
+                Case Else
+                    Console.WriteLine("Oops, that didn't seem to work. Please try again: ")
+                    Console.WriteLine(pTwo & ", please choose 1 for symbol 'X' or 2 for symbol 'O': ")
+                    symbolChoice = Console.ReadLine()
+            End Select
+        End While
+    End Sub
+    Sub updateBoard(ByVal xCoord, ByVal yCoord, ByVal symbol)
+        theBoard(xCoord, yCoord) = symbol
+    End Sub
 End Module
