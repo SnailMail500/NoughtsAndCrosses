@@ -7,6 +7,7 @@ Module Program
     Dim oneSymbol As String
     Dim twoSymbol As String
     Dim theBoard(5, 5) As String
+    Dim winCheck As Boolean = False
     Sub Main(args As String()) 'this is ugly, maybe a for loop?
         Console.WriteLine("Noughts and Crosses v0.1")
 
@@ -21,7 +22,7 @@ Module Program
         Call createBoard()
         Call menu()
     End Sub
-    Sub createBoard() 'make this more efficient in future version(s)!
+    Sub createBoard() 'make this more efficient in future version(s)! (if at all possible, which it definitely is, so if I can be bothered)
         theBoard(1, 0) = " 1 " 'begin xCoord numbering
         theBoard(2, 0) = "   "
         theBoard(3, 0) = " 2 "
@@ -166,6 +167,29 @@ Module Program
     End Sub
     Sub updateBoard(ByVal xCoord, ByVal yCoord, ByVal symbol)
         theBoard(xCoord, yCoord) = symbol
+        Console.Clear()
+        Call drawBoard()
     End Sub
+    Sub winCheckMain()
+        Dim checkRun As Boolean = True
+        While checkRun = True
+            checkX(winCheck)
+            Select Case winCheck
+                Case True
+                    winCheck = True
+            End Select
+        End While
+    End Sub
+    Function checkX(ByRef winCheck)
+        For j = 1 To 5 'I am only using j because otherwise I will confuse myself when I have to use vectors in ij notation
+            If (theBoard(1, j) = " X " Or theBoard(1, j) = " Y ") And (theBoard(3, j) = " X " Or theBoard(3, j) = " Y ") And (theBoard(5, j) = " X " Or theBoard(5, j) = " Y ") Then
+                '^this line makes me cry... quite a lot
+                Return True
+            Else
+                Return False
+            End If
+        Next
+    End Function
 End Module
 'Look at me, I've commented two programs now. Well done me.
+'whatpulse says this program used 8,872 keystrokes in one day (maximum) which I, personally, feel is far, far too many.
