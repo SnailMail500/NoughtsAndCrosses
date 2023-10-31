@@ -192,4 +192,4 @@ Module Program
     End Function
 End Module
 'Look at me, I've commented two programs now. Well done me.
-'whatpulse says this program used 8,872 keystrokes in one day (maximum) which I, personally, feel is far, far too many.
+'whatpulse says this program used 9,054 keystrokes in one day (maximum) which I, personally, feel is far, far too many.
