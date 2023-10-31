@@ -180,16 +180,23 @@ Module Program
             End Select
         End While
     End Sub
-    Function checkX(ByRef winCheck)
+    Sub checkX(ByRef winCheck)
         For j = 1 To 5 'I am only using j because otherwise I will confuse myself when I have to use vectors in ij notation
             If (theBoard(1, j) = " X " Or theBoard(1, j) = " Y ") And (theBoard(3, j) = " X " Or theBoard(3, j) = " Y ") And (theBoard(5, j) = " X " Or theBoard(5, j) = " Y ") Then
-                '^this line makes me cry... quite a lot
-                Return True
+                '^this line will not work- IF 1, 3, 5 = x Or 1, 3, 5 = Y then set to correct- but there must be a more efficient or pleasant way to do this
+                winCheck = True
             Else
-                Return False
+                winCheck = False
             End If
         Next
-    End Function
+    End Sub
+    Sub checkY(ByRef winCheck)
+        For i = 1 To 5
+            If (theBoard(i, 1) = " X " Or theBoard(i, 1) = " Y ") And (theBoard(i, 3) = " X " Or theBoard(i, 3) = " Y ") And (theBoard(i, 5) = " X " Or theBoard(i, 5) = " Y ") Then
+                '^Ditto for this line. Lesson learned- do not code when tired.S
+            End If
+        Next
+    End Sub
 End Module
 'Look at me, I've commented two programs now. Well done me.
 'whatpulse says this program used 9,054 keystrokes in one day (maximum) which I, personally, feel is far, far too many.
